@@ -1,57 +1,12 @@
 import csv #csv
 import copy #deepcopy
-import functools #reduce
+from classes.MatchResult import MatchResult
+from classes.TimeSlot import TimeSlot
+from functions.helperFunctions import selectionSort
 
-## HELPER FUNCTIONS
+fileName = input('Enter the name of the schedule file: ')
 
-def selectionSort(A):
-    # Traverse through all array elements 
-    for i in range(len(A)): 
-      
-        # Find the minimum element in remaining unsorted array 
-        min_idx = i 
-        for j in range(i+1, len(A)): 
-            if A[min_idx].numberUnavailable > A[j].numberUnavailable: 
-                min_idx = j 
-              
-        # Swap the found minimum element with  
-        # the first element         
-        A[i], A[min_idx] = A[min_idx], A[i]
-        
-    return
-
-def combineSchedules(schedule1, schedule2):
-    combinedSchedule = []
-    for pair in zip(schedule1, schedule2):
-        combinedSchedule.append(pair[0] + pair[1])
-    return combinedSchedule
-        
-## CLASSES
-
-class TimeSlot:
-    def __init__(self, day, time, availability):
-        self.day = day
-        self.time = time
-        self.availability = availability
-
-class MatchResult:
-    def __init__(self, days, times, availabilities):
-        self.dayA = days[0]
-        self.dayB = days[1]
-        self.timeA = times[0]
-        self.timeB = times[1]
-        combinedSchedules = combineSchedules(availabilities[0], availabilities[1])
-        unavailablePeople = []
-        for i in range(0, len(combinedSchedules)):
-            if combinedSchedules[i] == 0:
-                unavailablePeople.append(NAMES[i])
-        self.combinedSchedules = combinedSchedules
-        self.unavailablePeople = unavailablePeople
-        self.numberUnavailable = len(unavailablePeople)
-
-## SCRIPT
-
-fileObject = open('bible_study_schedules.csv')
+fileObject = open(fileName)
 csvObject = csv.reader(fileObject)
 
 rowNumber = 0
@@ -80,7 +35,7 @@ for i in range(len(schedules)):
     scheduleA = schedules[i]
     for j in range(i+1, len(schedules)):
         scheduleB = schedules[j]
-        match = MatchResult((scheduleA.day, scheduleB.day), (scheduleA.time, scheduleB.time), (scheduleA.availability, scheduleB.availability))
+        match = MatchResult((scheduleA.day, scheduleB.day), (scheduleA.time, scheduleB.time), (scheduleA.availability, scheduleB.availability), NAMES)
         pairedSchedules.append(match)
 
 selectionSort(pairedSchedules)
