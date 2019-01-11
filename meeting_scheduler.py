@@ -40,18 +40,22 @@ for i in range(len(schedules)):
 
 selectionSort(pairedSchedules)
 
-optionNumber = 1
-print('Schedule Report')
-print('---------------')
-for result in pairedSchedules:
-    print(str(optionNumber) + ') ' + result.dayA + ' ' + result.timeA + ' and ' + result.dayB + ' ' + result.timeB)
-    print('Number unavailable: ' + str(result.numberUnavailable))
-    print('People unavailable: ', end='')
-    for name in result.unavailablePeople:
-        print(name + ', ', end='')
-    print()
-    print('---------------')
-    optionNumber = optionNumber + 1
+outFileName = input('Enter the name for the report file: ')
+with open(outFileName, 'w') as outFile:
+    optionNumber = 1
+    outFile.write('Schedule Report\n\n')
+    for result in pairedSchedules:
+        outFile.write('{number}) {dayA} {timeA} and {dayB} {timeB}\n'.format(number=optionNumber, dayA=result.dayA, timeA=result.timeA, dayB=result.dayB, timeB=result.timeB))
+        outFile.write('Number unavailable: {unavailable}\n'.format(unavailable=result.numberUnavailable))
+        outFile.write('People unavailable: ')
+        for name in result.unavailablePeople:
+            outFile.write(name + ', ')
+        outFile.write('\n\n')
+        optionNumber = optionNumber + 1
+
+
+
+
     
     
 
