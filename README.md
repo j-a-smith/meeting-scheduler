@@ -2,7 +2,7 @@
 Python script for evaluating different meeting schedules based on individuals' availability. Uses formatted CSV as input and outputs report for each potential meeting schedule.
 
 Set-up:
-- Download this project as a zip file and unzip it on your computer
+- Download this project as a zip file and unzip it on your computer (go back to the main "meeting-scheduler" page and click on the green "Code" button)
 - Download Python here: https://www.python.org/downloads/ \
   (the latest version is fine, or anything that starts with 3 (NOT 2.something) \
   An installation wizard should pop up, go through the steps to install Python 
