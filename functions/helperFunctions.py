@@ -19,3 +19,6 @@ def combineSchedules(schedule1, schedule2):
     for pair in zip(schedule1, schedule2):
         combinedSchedule.append(pair[0] + pair[1])
     return combinedSchedule
+
+def FindDifference(list1, list2):
+    return(list(set(list1) - set(list2)))
